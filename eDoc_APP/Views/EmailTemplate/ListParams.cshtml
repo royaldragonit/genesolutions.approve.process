@@ -1,0 +1,43 @@
+﻿@model IEnumerable<eDoc_Core.Models.Entities.ParamEmailTemplate>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách tham số</h2>
+<table class="table talbe-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParamName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ParamValue)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.CreateOn)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ParamValue)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateOn)
+            </td>
+        </tr>
+    }
+
+</table>

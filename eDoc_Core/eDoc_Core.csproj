@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5BE3D356-FDAF-4466-A9C7-31176D101955}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eDoc_Core</RootNamespace>
+    <AssemblyName>eDoc_Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commons\Const\MessageConst.cs" />
+    <Compile Include="Core\IdentityExtension.cs" />
+    <Compile Include="Migrations\202209220345093_Add Table TypeDocument.cs" />
+    <Compile Include="Migrations\202209220345093_Add Table TypeDocument.designer.cs">
+      <DependentUpon>202209220345093_Add Table TypeDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220638552_Add Multipe Table.cs" />
+    <Compile Include="Migrations\202209220638552_Add Multipe Table.designer.cs">
+      <DependentUpon>202209220638552_Add Multipe Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220641568_Add Multipe Table Fix.cs" />
+    <Compile Include="Migrations\202209220641568_Add Multipe Table Fix.designer.cs">
+      <DependentUpon>202209220641568_Add Multipe Table Fix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220654411_Add Multipe Table Fix2.cs" />
+    <Compile Include="Migrations\202209220654411_Add Multipe Table Fix2.designer.cs">
+      <DependentUpon>202209220654411_Add Multipe Table Fix2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220717078_Add Step Column To Document Table.cs" />
+    <Compile Include="Migrations\202209220717078_Add Step Column To Document Table.designer.cs">
+      <DependentUpon>202209220717078_Add Step Column To Document Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220719466_Fix Document Table.cs" />
+    <Compile Include="Migrations\202209220719466_Fix Document Table.designer.cs">
+      <DependentUpon>202209220719466_Fix Document Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209220821076_Add StepIndex Step TAble.cs" />
+    <Compile Include="Migrations\202209220821076_Add StepIndex Step TAble.designer.cs">
+      <DependentUpon>202209220821076_Add StepIndex Step TAble.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209230230283_Add Table ApproveDocument.cs" />
+    <Compile Include="Migrations\202209230230283_Add Table ApproveDocument.designer.cs">
+      <DependentUpon>202209230230283_Add Table ApproveDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209230259411_Add Table ApproveDocument Fix Document.cs" />
+    <Compile Include="Migrations\202209230259411_Add Table ApproveDocument Fix Document.designer.cs">
+      <DependentUpon>202209230259411_Add Table ApproveDocument Fix Document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209230425513_Add Table ApproveDocument Fixed.cs" />
+    <Compile Include="Migrations\202209230425513_Add Table ApproveDocument Fixed.designer.cs">
+      <DependentUpon>202209230425513_Add Table ApproveDocument Fixed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209260225026_Restore ApproveProcessId for Document Table.cs" />
+    <Compile Include="Migrations\202209260225026_Restore ApproveProcessId for Document Table.designer.cs">
+      <DependentUpon>202209260225026_Restore ApproveProcessId for Document Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209260922310_Change Max Length NvarChar.cs" />
+    <Compile Include="Migrations\202209260922310_Change Max Length NvarChar.designer.cs">
+      <DependentUpon>202209260922310_Change Max Length NvarChar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209270322474_Add Template Email Table.cs" />
+    <Compile Include="Migrations\202209270322474_Add Template Email Table.designer.cs">
+      <DependentUpon>202209270322474_Add Template Email Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209270326472_Update Primary Template Email Table And DisplayName for Column.cs" />
+    <Compile Include="Migrations\202209270326472_Update Primary Template Email Table And DisplayName for Column.designer.cs">
+      <DependentUpon>202209270326472_Update Primary Template Email Table And DisplayName for Column.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209270720389_Update Table Param For Email Template.cs" />
+    <Compile Include="Migrations\202209270720389_Update Table Param For Email Template.designer.cs">
+      <DependentUpon>202209270720389_Update Table Param For Email Template.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202209280604306_Add LogException Table.cs" />
+    <Compile Include="Migrations\202209280604306_Add LogException Table.designer.cs">
+      <DependentUpon>202209280604306_Add LogException Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApproveProcessModels\ApproveActionModel.cs" />
+    <Compile Include="Models\ApproveProcessModels\ApproveProcessRequestModel.cs" />
+    <Compile Include="Models\ApproveProcessModels\StepModel.cs" />
+    <Compile Include="Models\DocumentModels\CreateDocumentModel.cs" />
+    <Compile Include="Core\DbContextExtension.cs" />
+    <Compile Include="Models\CustomModels\ResultCustomModel.cs" />
+    <Compile Include="Models\DocumentModels\GS_SummaryDocument.cs" />
+    <Compile Include="Models\Entities\Approve.cs" />
+    <Compile Include="Models\Entities\ApproveDocument.cs" />
+    <Compile Include="Models\Entities\ApproveProcess.cs" />
+    <Compile Include="Models\Entities\BaseEntities.cs" />
+    <Compile Include="Models\Entities\Document.cs" />
+    <Compile Include="Models\Entities\DocumentFile.cs" />
+    <Compile Include="Models\Entities\eDocumentContext.cs" />
+    <Compile Include="Models\Entities\EmailTemplate.cs" />
+    <Compile Include="Models\Entities\LogException.cs" />
+    <Compile Include="Models\Entities\ParamEmailTemplate.cs" />
+    <Compile Include="Models\Entities\Step.cs" />
+    <Compile Include="Models\Entities\StoredProcedures\GS_GetListDocumentByEmail.cs" />
+    <Compile Include="Models\Entities\StoredProcedures\GS_GetProcessDocument.cs" />
+    <Compile Include="Models\Entities\TypeDocument.cs" />
+    <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="Models\Entities\Views\vApproveProcess.cs" />
+    <Compile Include="Models\Entities\Views\vDocument.cs" />
+    <Compile Include="Models\Mapper\AutoMapperProfile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202209220345093_Add Table TypeDocument.resx">
+      <DependentUpon>202209220345093_Add Table TypeDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220638552_Add Multipe Table.resx">
+      <DependentUpon>202209220638552_Add Multipe Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220641568_Add Multipe Table Fix.resx">
+      <DependentUpon>202209220641568_Add Multipe Table Fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220654411_Add Multipe Table Fix2.resx">
+      <DependentUpon>202209220654411_Add Multipe Table Fix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220717078_Add Step Column To Document Table.resx">
+      <DependentUpon>202209220717078_Add Step Column To Document Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220719466_Fix Document Table.resx">
+      <DependentUpon>202209220719466_Fix Document Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209220821076_Add StepIndex Step TAble.resx">
+      <DependentUpon>202209220821076_Add StepIndex Step TAble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209230230283_Add Table ApproveDocument.resx">
+      <DependentUpon>202209230230283_Add Table ApproveDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209230259411_Add Table ApproveDocument Fix Document.resx">
+      <DependentUpon>202209230259411_Add Table ApproveDocument Fix Document.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209230425513_Add Table ApproveDocument Fixed.resx">
+      <DependentUpon>202209230425513_Add Table ApproveDocument Fixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209260225026_Restore ApproveProcessId for Document Table.resx">
+      <DependentUpon>202209260225026_Restore ApproveProcessId for Document Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209260922310_Change Max Length NvarChar.resx">
+      <DependentUpon>202209260922310_Change Max Length NvarChar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209270322474_Add Template Email Table.resx">
+      <DependentUpon>202209270322474_Add Template Email Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209270326472_Update Primary Template Email Table And DisplayName for Column.resx">
+      <DependentUpon>202209270326472_Update Primary Template Email Table And DisplayName for Column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209270720389_Update Table Param For Email Template.resx">
+      <DependentUpon>202209270720389_Update Table Param For Email Template.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209280604306_Add LogException Table.resx">
+      <DependentUpon>202209280604306_Add LogException Table.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

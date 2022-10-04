@@ -1,0 +1,80 @@
+﻿@using eDoc_Core.Models.Entities;
+@model List<SelectListItem>
+<div class="row">
+    <form method="post" name="formCreateDocument" enctype="multipart/form-data" action="CreateDocument" onsubmit="fChangeValueDescription()">
+        <div class="control-group">
+            <div class="form-group">
+                <label> Chọn loại tài liệu </label>
+                @Html.DropDownList("typeDocumentId", ViewBag.TypeDocument as List<SelectListItem>, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="description">Mô tả</label>
+                <textarea class="form-control summernote" id="description" name="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="filePrimary">Chọn tệp tài liệu (.doc, .docx) </label>
+                <input type="file" id="filePrimary" required name="filePrimary" />
+            </div>
+            <div class="form-group">
+                <label for="fileReference">Chọn tệp tài liệu tham khảo(.doc, .docx) </label>
+                <input type="file" id="fileReference" multiple name="fileReference" />
+            </div>
+            <div class="form-group">
+                <label for="file">@Html.ValidationMessage("Error")</label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success">Gửi / Trình ký</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <!-- Summernote -->
+    <script src="/Content/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- CodeMirror -->
+    <script src="/Content/AdminLTE/plugins/codemirror/codemirror.js"></script>
+    <script src="/Content/AdminLTE/plugins/codemirror/mode/css/css.js"></script>
+    <script src="/Content/AdminLTE/plugins/codemirror/mode/xml/xml.js"></script>
+    <script src="/Content/AdminLTE/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script>
+        function fChangeValueDescription() {
+            var html = $('.summernote').summernote('code');
+            log(html);
+            document.formCreateDocument.description.value = html;
+            return true;
+        }
+        $(function () {
+            // Summernote
+            $('.summernote').summernote({
+                height: 300
+            })
+
+            // CodeMirror
+            //CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+            //    mode: "htmlmixed",
+            //    theme: "monokai"
+            //});
+        })
+        $(document).ready(function () {
+            //$.ajax({
+            //    url: "/Document/CreateDocument",
+            //    type: "POST",
+            //    timeout: 0,
+            //    contentType: 'application/json',
+            //    data: JSON.stringify({
+            //        name: "aa",
+            //        description: "bbbbbbb"
+            //    }),
+            //    success: function (result) {
+            //        if (result.success) {
+            //            alert("Tạo quy trình chấp thuận thành công");
+            //            location.href = "/Contract/ListContracts";
+            //        }
+            //    },
+            //    error: function (err) {
+            //        console.log("Lỗi", err);
+            //    }
+            //});
+        })
+    </script>
+}

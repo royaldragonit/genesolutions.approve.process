@@ -1,0 +1,39 @@
+﻿@model IEnumerable<eDoc_Core.Models.Entities.TypeDocument>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách loại tại liệu được định nghĩa</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", "TypeDocuments",null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Loại tài liệu
+        </th>
+        <th>
+            Ngày tạo
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateOn)
+        </td>
+        <td>
+            @Html.ActionLink("Chỉnh sửa", "Edit/"+ item.TypeDocumentId, "TypeDocuments", item.TypeDocumentId, new { @class = "btn btn-info" })
+            @Html.ActionLink("Xoá", "Delete/"+ item.TypeDocumentId, "TypeDocuments", item.TypeDocumentId, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,48 @@
+﻿@model eDoc_Core.Models.Entities.TypeDocument
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chỉnh sửa loại tài liệu</h2>
+
+@using (Html.BeginForm())
+{   
+    <div class="form-horizontal">
+        <h4>TypeDocument</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TypeDocumentId)
+        <div class="form-group">
+            <label> Xem danh sách template </label><a style="color:red;font-weight:bold;" href="/ApproveProcess">Tại đây</a>
+            <label for="template">Chọn mẫu quy trình </label><br />
+            @Html.DropDownList("approveProcessId", ViewBag.ApproveProcess as List<SelectListItem>, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreateOn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreateOn, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.CreateOn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index", "TypeDocuments", null, new { @class = "btn btn-primary" })
+</div>

@@ -1,0 +1,141 @@
+﻿@using eDoc_Core.Models.Entities.Views;
+@using eDoc_Core.Core;
+@using eDoc_Core.Models.Entities.StoredProcedures;
+@model vDocument
+@{
+    var process = ViewBag.Process as List<GS_GetProcessDocument>;
+    string name = User.GetClaimByType("name");
+}
+<div class="row">
+    <div class="col-md-6">
+
+        <form method="post" enctype="multipart/form-data" action="CreateDocument">
+            <div class="control-group">
+                <div class="form-group">
+                    <label> Xem danh sách template </label><a style="color:red;font-weight:bold;" href="/ApproveProcess">Tại đây</a>
+                    <label for="template">Chọn mẫu quy trình </label><br />
+                    @Html.DropDownList("approveProcessId", ViewBag.ApproveProcess as List<SelectListItem>, new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div class="form-group">
+                    <label> Loại tài liệu </label>
+                    <label for="template">Chọn mẫu quy trình </label><br />
+                    @Html.DropDownList("typeDocumentId", ViewBag.TypeDocument as List<SelectListItem>, new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div class="form-group">
+                    <label> Trạng thái: </label>
+                    @if (Model.StateApprove == 1)
+                    {
+                        <label style="color:green;">@name Đã chấp thuận </label>
+                    }
+                    else if (Model.StateApprove == 2)
+                    {
+                <label style="color:red;">@name Đã từ chối</label>
+                    }
+                    else if (Model.StateApprove == 0)
+                    {
+                        <label style="color:orange;"> Đang chờ duyệt </label>
+                    }
+                </div>
+                <div class="form-group">
+                    <label for="description">Mô tả</label>
+                    <textarea class="form-control" disabled id="description" name="description">@Model.Description</textarea>
+                </div>
+                @foreach (var item in ViewBag.ListFileDocuments)
+                {
+                    if (item.IsPrimaryFile)
+                    {
+                        <div class="form-group">
+                            <label for="file" style="color:red">Tệp tài liệu chính</label>
+                            <br />
+                            <a download href="@Url.Content("~/Content/Document/"+item.FileName)">@item.FileName</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <label for="file">Tệp tài liệu tham khảo</label>
+                            <br />
+                            <a download href="@Url.Content("~/Content/Document/"+item.FileName)">@item.FileName</a>
+                        </div>
+                    }
+                }
+                <div class="form-group">
+                    <label for="file">@Html.ValidationMessage("Error")</label>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-success" href="/Document">Quay lại</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h4>Tiến trình trong tài liệu</h4>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Giai đoạn</th>
+                    <th>Người duyệt</th>
+                    <th>Trạng thái</th>
+                    <th>Ghi chú</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in process)
+                {
+                    string style = "";
+                    if (item.StepIndex == item.Step)
+                    {
+                        style = "style=background-color:#8c8ed3;";
+                    }
+                    <tr @style>
+                        <td>@item.StepIndex</td>
+                        <td>@item.Email</td>
+                        @if (item.StateApprove == 1)
+                        {
+                            <td style="color: green; font-weight: bold;">Đã chấp thuận</td>
+                        }
+                        else if (item.StateApprove == 2)
+                        {
+                            <td style="color: red; font-weight: bold;">Đã từ chối</td>
+                        }
+                        else if (item.StateApprove == 0)
+                        {
+                            <td style="color:orange;font-weight:bold;">Đang chờ duyệt</td>
+                        }
+                        <td>
+                            @if (item.StateApprove != 0)
+                            {
+                                <label>@item.Description</label>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //$.ajax({
+            //    url: "/Document/CreateDocument",
+            //    type: "POST",
+            //    timeout: 0,
+            //    contentType: 'application/json',
+            //    data: JSON.stringify({
+            //        name: "aa",
+            //        description: "bbbbbbb"
+            //    }),
+            //    success: function (result) {
+            //        if (result.success) {
+            //            alert("Tạo quy trình chấp thuận thành công");
+            //            location.href = "/Contract/ListContracts";
+            //        }
+            //    },
+            //    error: function (err) {
+            //        console.log("Lỗi", err);
+            //    }
+            //});
+        })
+    </script>
+}

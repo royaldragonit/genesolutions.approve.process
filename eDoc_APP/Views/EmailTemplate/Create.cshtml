@@ -1,0 +1,104 @@
+﻿@using eDoc_Core.Core;
+@using eDoc_APP.Utilities;
+@model eDoc_Core.Models.Entities.EmailTemplate
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm mới</h2>
+
+@using (Html.BeginForm("Create", "EmailTemplate", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "fChangeValueDescription()" }))
+{
+    <div class="form-horizontal">
+        <h4>Mẫu Email</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextAreaFor(m => m.Content, new { @class = "summernote" })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="email" name="Email" class = "form-control" disabled = "disabled" value='@User.GetClaimByType("preferred_username")'/>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tạo" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary" })
+</div>
+
+@section Scripts{
+    <!-- Summernote -->
+    <script src="/Content/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- CodeMirror -->
+    <script src="/Content/AdminLTE/plugins/codemirror/codemirror.js"></script>
+    <script src="/Content/AdminLTE/plugins/codemirror/mode/css/css.js"></script>
+    <script src="/Content/AdminLTE/plugins/codemirror/mode/xml/xml.js"></script>
+    <script src="/Content/AdminLTE/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script>
+        function fChangeValueDescription() {
+            var html = $('.summernote').summernote('code');
+            log(html);
+            document.formCreateDocument.Content.value = html;
+            return true;
+        }
+        $(function () {
+            // Summernote
+            $('.summernote').summernote({
+                height: 300
+            })
+
+            // CodeMirror
+            //CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+            //    mode: "htmlmixed",
+            //    theme: "monokai"
+            //});
+        })
+        $(document).ready(function () {
+            //$.ajax({
+            //    url: "/Document/CreateDocument",
+            //    type: "POST",
+            //    timeout: 0,
+            //    contentType: 'application/json',
+            //    data: JSON.stringify({
+            //        name: "aa",
+            //        description: "bbbbbbb"
+            //    }),
+            //    success: function (result) {
+            //        if (result.success) {
+            //            alert("Tạo quy trình chấp thuận thành công");
+            //            location.href = "/Contract/ListContracts";
+            //        }
+            //    },
+            //    error: function (err) {
+            //        console.log("Lỗi", err);
+            //    }
+            //});
+        })
+    </script>
+}

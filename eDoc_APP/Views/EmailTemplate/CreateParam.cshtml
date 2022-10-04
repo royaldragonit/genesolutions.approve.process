@@ -1,0 +1,58 @@
+﻿@model eDoc_Core.Models.Entities.ParamEmailTemplate
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm tham số</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ParamName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ParamName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ParamName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Chọn mẫu Email</label>
+            <div class="col-md-10">
+                @Html.DropDownList("EmailTemplateId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmailTemplateId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ParamValue, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.ParamValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ParamValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm mới" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Danh sách", "ListParams",null, new { @class = "btn btn-primary" })
+</div>

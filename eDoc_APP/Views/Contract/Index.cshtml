@@ -1,0 +1,24 @@
+﻿
+<div class="row">
+    <form method="post" enctype="multipart/form-data" action="/ApproveProcess/CreateApproveProcess">
+        <div class="control-group">
+            <div class="form-group">
+                <label for="template">Chọn Template, xem danh sách template </label><a class="btn btn-info" href="/Contract/ListContracts">Tại đây</a>
+            </div>
+            <div class="form-group">
+                <label for="file">Chọn tệp tài liệu (.doc, .docx) </label>
+                <input type="file" id="file" required name="file" />
+            </div>
+            <div class="form-group">
+                <label for="file2">Chọn tệp tài liệu (.doc, .docx) </label>
+                <input type="file" id="file2" required name="file2" />
+            </div>
+            <div class="form-group">
+                <label for="file">@Html.ValidationMessage("Error")</label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success">Tạo hợp đồng</button>
+            </div>
+        </div>
+    </form>
+</div>

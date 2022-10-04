@@ -1,0 +1,142 @@
+﻿@using eDoc_Core.Models.Entities;
+@model ApproveProcess
+@section styles{
+    <link href="~/Content/AdminLTE/css/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/css/site.css" rel="stylesheet" />
+    <style>
+        .label-info {
+            background-color: #5bc0de !important;
+        }
+
+        .label-primary {
+            background-color: #337ab7 !important;
+        }
+
+        .label-danger {
+            background-color: #d9534f !important;
+        }
+
+        .label-important {
+            background-color: #d9534f !important;
+        }
+
+        .label-warning {
+            background-color: #f0ad4e !important;
+        }
+
+        .label-default {
+            background-color: #5bc0de !important;
+        }
+
+        .label-success {
+            background-color: #5cb85c !important;
+        }
+
+        .label {
+            display: inline;
+            padding: 0.2em 0.6em 0.3em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25em;
+        }
+
+        legend.scheduler-border {
+            width: inherit !important; /* Or auto */
+            padding: 0 10px !important; /* To give a bit of padding on the left and right */
+            border-bottom: none !important;
+        }
+
+        fieldset {
+            border: 1px solid #333 !important;
+            padding: 10px !important;
+            margin-bottom: 10px !important;
+        }
+    </style>
+}
+@{
+    int i = 1;
+}
+<h1>@Model.Name</h1>
+<div id="listStep">
+    @foreach (var item in Model.Steps)
+    {
+        string approveWith = string.Join(",", item.Approves.Select(x => x.Email));
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Bước @i</legend>
+            <div class="control-group">
+                <div class="form-group" disabled>
+                    <label for="@string.Concat("approveWith_",i)">Người phê duyệt trong bước này</label>
+                    <input type="text" disabled id="@string.Concat("approveWith_",i)" data-role="tagsinput" value="@approveWith" />
+                </div>
+                <div class="form-group">
+                    <label>Nếu thao tác bị từ chối sẽ quay lại bước</label>
+                    <select class="form-control" disabled id="@string.Concat("rollBack_",i)">
+                        <option value="@item.RollBackToStep">@item.RollBackToStep</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        i++;
+    }
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href="/ApproveProcess" class="btn btn-primary">Danh sách</a>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Content/AdminLTE/js/bootstrap-tagsinput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.3/typeahead.bundle.min.js" integrity="sha512-E4rXB8fOORHVM/jZYNCX2rIY+FOvmTsWJ7OKZOG9x/0RmMAGyyzBqZG0OGKMpTyyuXVVoJsKKWYwbm7OU2klxA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.3/typeahead.jquery.min.js" integrity="sha512-FoYDcEN8AC55Q46d/gra+GO1tD9Bw7ZTLBUDqaza5YQ+g2UGysVxBoVOkXB6RVVM8wFyPJxr3vcEz9wxbFKM6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.3/bloodhound.min.js"></script>
+    <script>
+        var elt = $('#approveWith_1');
+        fAddEventTag(elt);
+        $(document).ready(function () {
+            $(".tt-dropdown-menu").addClass("tt-menu");
+            $(".tt-menu").addClass("tt-dropdown-menu");
+        });
+        var i = 1;
+        function fAddStep() {
+            i++;
+            let option = ``;
+            for (var index = 1; index < i; index++) {
+                option += `<option value="${index}">Bước ${index}</option>`;
+            }
+            var element = `
+<fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Bước ${i}</legend>
+                                    <div class="control-group">
+                                        <div class="form-group">
+                                            <label for="approve_${i}">Người Approve</label>
+                                            <select class="form-control" id="approve_${i}">${optionlstUser}</select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="approveWith_${i}">Đồng thời Approve Với</label>
+                                            <input type="text" id="approveWith_${i}" data-role="tagsinput" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nếu thao tác bị từ chối sẽ quay lại bước</label>
+                                            <select class="form-control" id="rollBack_${i}">
+                                                ${option}
+                                            </select>
+                                        </div>
+                                    </div>
+</fieldset>`;
+            $("#listStep").append(element);
+            //Add event lại
+            fAddEventTag($("#approveWith_" + i));
+        }
+        function fAddEventTag(elt) {
+            elt.tagsinput();
+            $(".tt-dropdown-menu").each(function () {
+                if (!$(this).hasClass("tt-menu"))
+                    $(this).addClass("tt-menu");
+            });
+        }
+    </script>
+}

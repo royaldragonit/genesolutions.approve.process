@@ -1,0 +1,35 @@
+﻿@using GS.eDocument.Models.Entities;
+@model List<SelectListItem>
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="control-group">
+            <div class="form-group">
+                <label> Xem danh sách template </label><a style="color:red;font-weight:bold;" href="/Contract/ListContracts">Tại đây</a>
+                <label for="template">Chọn mẫu quy trình </label><br />
+                @Html.DropDownList("approveProcessId", Model, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="file">Loại tài liệu</label>
+                <input type="text" class="form-control" id="typeDocument" required name="typeDocument" />
+            </div>
+            <div class="form-group">
+                <label for="description">Mô tả</label>
+                <textarea class="form-control" id="description" required name="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="file">Chọn tệp tài liệu (.doc, .docx) </label>
+                <input type="file" id="file" required name="filePrimary" />
+            </div>
+            <div class="form-group">
+                <label for="file">Chọn tệp tài liệu tham khảo(.doc, .docx) </label>
+                <input type="file" id="file" required name="file" />
+            </div>
+            <div class="form-group">
+                <label for="file">@Html.ValidationMessage("Error")</label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success">Tạo hợp đồng</button>
+            </div>
+        </div>
+    </form>
+</div>

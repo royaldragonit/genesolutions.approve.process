@@ -1,0 +1,169 @@
+﻿@using eDoc_APP.Utilities;
+@using eDoc_Core.Models.Entities.StoredProcedures;
+@model List<GS_GetListDocumentByEmail>
+<div class="row" style="margin-bottom:10px;">
+    <div class="col-md-6">
+        <a class="btn btn-success" href="/Document/Create">Thêm mới</a>
+    </div>
+    <div class="col-md-6">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+            <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+            <div class="input-group input-group-sm" style="width: 100% !important;">
+                <input class="form-control form-control-navbar" id="txtSearch" onkeyup="fSearch(event);" type="search" placeholder="Tìm kiếm văn bản phê duyệt" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="button" onclick="fSearch(null);">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Mẫu quy trình</th>
+            <th>Loại tài liệu</th>
+            <th>Mô tả</th>
+            <th>Số File</th>
+            <th>Người tạo</th>
+            <th>Tiến trình</th>
+            <th>Trạng thái</th>
+            <th>Hoàn thành</th>
+            <th>Xem</th>
+        </tr>
+    </thead>
+    <tbody id="listDocument">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><input type="checkbox" /></td>
+                <td>@item.ApproveProcessName</td>
+                <td>@item.DocumentTypeName</td>
+                <td>@item.Description</td>
+                <td>@item.FileQuantity</td>
+                <td>@item.Email</td>
+                <td>@item.Process</td>
+                <td>
+                    @if (item.StateApprove == 1)
+                    {
+                        <button disabled class="btn btn-success">Đã phê duyệt</button>
+                    }
+                    else if (item.StateApprove == 0)
+                    {
+                        <button class="btn btn-success" onclick="@string.Concat("fApprove('approve',",@item.DocumentId,")")">Phê duyệt</button>
+                        <button class="btn btn-danger" onclick="@string.Concat("fApprove('reject',",@item.DocumentId,")")">Từ chối</button>
+                    }
+                    else
+                    {
+                        <button disabled class="btn btn-danger">Đã từ chối</button>
+                    }
+                </td>
+                <td>
+                    @if (item.IsCompleted)
+                    {
+                        <button disabled class="btn btn-success">Đã hoàn thành</button>
+                    }
+                    else
+                    {
+                        <button disabled class="btn btn-danger">Chưa hoàn thành</button>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-info" href="@string.Concat("/Document/Detail/",item.DocumentId)">Chi tiết</a>
+                </td>
+            </tr>
+        }
+        @{ if (Model == null || Model.Count() == 0)
+            {
+                <tr>
+                    <td></td>
+                    <td>Danh sách tài liệu rỗng!</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        var model =@Html.Raw(Model.ToJson());
+        $(document).ready(function () {
+            console.log("Model", model);
+        });
+        function fSearch(e) {
+            if (e != null) {
+                var code = e.key;
+                if (code === "Enter") {
+                    fQuery($("#txtSearch").val());
+                }
+            }
+            else {
+                fQuery($("#txtSearch").val());
+            }
+        }
+        function fQuery(val) {
+            var search = model.filter(x => removeUnicode(x.Description).indexOf(removeUnicode(val)) >= 0 || removeUnicode(x.ApproveProcessName).indexOf(removeUnicode(val)) >= 0 || removeUnicode(x.DocumentTypeName).indexOf(removeUnicode(val)) >= 0 || removeUnicode(x.Email).indexOf(removeUnicode(val)) >= 0 || removeUnicode(x.DescriptionApprove).indexOf(removeUnicode(val)) >= 0);
+            log(search);
+            $("#listDocument").empty();
+            for (var item of search) {
+                let element = `<tr>
+                <td><input type="checkbox" /></td>
+                <td>${item.ApproveProcessName}</td>
+                <td>${item.DocumentTypeName}</td>
+                <td>${item.Description}</td>
+                <td>${item.FileQuantity}</td>
+                <td>${item.Email}</td>
+                <td>${item.Process}</td>
+                <td>`;
+                    if (item.StateApprove == 1)
+                    {
+                        element += `<button disabled class="btn btn-success">Đã phê duyệt</button>`;
+                    }
+                    else if (item.StateApprove == 0)
+                    {
+                        element += `<button class="btn btn-success" onclick="fApprove('approve',${item.DocumentId})">Phê duyệt</button>
+                        <button class="btn btn-danger" onclick="fApprove('reject',${item.DocumentId})">Từ chối</button>`;
+                    }
+                    else
+                    {
+                        element += `<button disabled class="btn btn-danger">Đã từ chối</button>`;
+                }
+                element+=`
+                </td>
+                <td>
+                    <a class="btn btn-info" href="/Document/Detail/${item.DocumentId}">Chi tiết</a>
+                </td>
+            </tr>`;
+                $("#listDocument").append(element);
+            }
+        }
+        function fApprove(type, documentId) {
+            let description = prompt("Ghi chú ngắn cho tài liệu này", "");
+            $.ajax({
+                url: "/Document/ActionApprove",
+                type: "POST",
+                timeout: 0,
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    type: type,
+                    documentId: documentId,
+                    description: description
+                }),
+                success: function (result) {
+                    alert(result.Message);
+                },
+                error: function (err) {
+                    console.log("Lỗi", err);
+                }
+            });
+        }
+    </script>
+}
