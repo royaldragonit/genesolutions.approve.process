@@ -149,6 +149,14 @@
     <Compile Include="Migrations\202209280604306_Add LogException Table.designer.cs">
       <DependentUpon>202209280604306_Add LogException Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210040444500_Remove Log Table.cs" />
+    <Compile Include="Migrations\202210040444500_Remove Log Table.designer.cs">
+      <DependentUpon>202210040444500_Remove Log Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210040514399_Add isAllAccept.cs" />
+    <Compile Include="Migrations\202210040514399_Add isAllAccept.designer.cs">
+      <DependentUpon>202210040514399_Add isAllAccept.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApproveProcessModels\ApproveActionModel.cs" />
     <Compile Include="Models\ApproveProcessModels\ApproveProcessRequestModel.cs" />
@@ -229,6 +237,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209280604306_Add LogException Table.resx">
       <DependentUpon>202209280604306_Add LogException Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210040444500_Remove Log Table.resx">
+      <DependentUpon>202210040444500_Remove Log Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210040514399_Add isAllAccept.resx">
+      <DependentUpon>202210040514399_Add isAllAccept.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

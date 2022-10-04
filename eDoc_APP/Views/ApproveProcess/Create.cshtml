@@ -84,6 +84,10 @@
                 <input type="text" id="approveWith_1" data-role="tagsinput" />
             </div>
             <div class="form-group">
+                <label for="isAllAccept_1">Người phê duyệt trong bước này</label>
+                <input type="checkbox" id="isAllAccept_1" class="checkbox" />
+            </div>
+            <div class="form-group">
                 <label>Nếu thao tác bị từ chối sẽ quay lại bước</label>
                 <select class="form-control" disabled id="rollBack_1">
                     <option value="1">Bước 1</option>
@@ -97,8 +101,8 @@
         <button type="button" onclick="fAddStep()" class="btn btn-primary">Thêm Bước</button>
     </div>
     <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3">
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
         <button type="button" onclick="fCreateProcess()" class="btn btn-success">Tạo Quy Trình</button>
     </div>
 </div>
@@ -129,6 +133,10 @@
                                 <div class="form-group">
                                     <label for="approveWith_${i}">Người phê duyệt trong bước này</label>
                                     <input type="text" id="approveWith_${i}" data-role="tagsinput" />
+                                </div>
+                                  <div class="form-group">
+                                    <label for="isAllAccept_${i}">Tất cả cùng đồng thuận duyệt</label>
+                                    <input type="checkbox" id="isAllAccept_${i}" class="checkbox" />
                                 </div>
                                 <div class="form-group">
                                     <label>Nếu thao tác bị từ chối sẽ quay lại bước</label>
@@ -164,6 +172,7 @@
                     let t = $("#approveWith_" + index).val().split(',');
                     var item = {
                         approveWith: t,
+                        isAllAccept: $("#isAllAccept_" + index).is(':checked'),
                         rollBack: parseInt($("#rollBack_" + index).val())
                     };
                     arr.push(item);

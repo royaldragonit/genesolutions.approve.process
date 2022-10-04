@@ -21,21 +21,14 @@ namespace eDoc_APP
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DepedencyInjection.RegisterComponents();
+            log4net.Config.XmlConfigurator.Configure();
         }
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
             if (exception != null)
             {
-                //log the error
-                LogException log = new LogException();
-                log.StackTrace = exception.StackTrace;
-                log.Message = exception.Message;
-                log.CreateOn = DateTime.Now;
-                eDocumentContext _db = new eDocumentContext();
-                _db.LogExceptions.Add(log);
-                _db.SaveChanges();
-                _db.Dispose();
+                HandleError.Error(exception.Message,exception);
             }
         }
     }

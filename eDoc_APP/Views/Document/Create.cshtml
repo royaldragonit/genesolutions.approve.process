@@ -12,12 +12,12 @@
                 <textarea class="form-control summernote" id="description" name="description"></textarea>
             </div>
             <div class="form-group">
-                <label for="filePrimary">Chọn tệp tài liệu (.doc, .docx) </label>
-                <input type="file" id="filePrimary" required name="filePrimary" />
+                <label for="filePrimary">Văn bản phê duyệt (.doc, .docx,.xls,xlsx) </label>
+                <input type="file" id="filePrimary" accept="application/msword, application/vnd.ms-excel,application/pdf" required name="filePrimary" />
             </div>
             <div class="form-group">
                 <label for="fileReference">Chọn tệp tài liệu tham khảo(.doc, .docx) </label>
-                <input type="file" id="fileReference" multiple name="fileReference" />
+                <input type="file" id="fileReference"  accept="application/msword, application/vnd.ms-excel,application/pdf" multiple name="fileReference" />
             </div>
             <div class="form-group">
                 <label for="file">@Html.ValidationMessage("Error")</label>

@@ -15,6 +15,10 @@ namespace eDoc_Core.Models.Entities
         public int StepId { get; set; }
         public int StepIndex { get; set; }
         public int UserId { get; set; }
+        /// <summary>
+        /// Bước này nếu = true thì tất cả những người trong quy trình phải approve
+        /// </summary>
+        public bool IsAllAccept { get; set; }
         public int RollBackToStep { get; set; }
         [ForeignKey("ApproveProcess")]
         public int ApproveProcessId { get; set; }

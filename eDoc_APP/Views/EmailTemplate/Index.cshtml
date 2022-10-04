@@ -7,9 +7,9 @@
 
 <h2>Danh sách mẫu Email</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Thêm mới", "Create",null,new {@class="btn btn-primary"})
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -43,7 +43,7 @@
         </td>
         <td>
             @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.EmailTemplateId }, new { @class = "btn btn-info" }) |
-            @Html.ActionLink("Xoá", "Delete", new { id = item.EmailTemplateId }, new { @class = "btn btn-danger" })
+           @* @Html.ActionLink("Xoá", "Delete", new { id = item.EmailTemplateId }, new { @class = "btn btn-danger" })*@
         </td>
     </tr>
 }

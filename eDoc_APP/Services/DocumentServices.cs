@@ -187,7 +187,8 @@ namespace eDoc_APP.Services
             DocumentFile file = await _db.DocumentFiles.FirstOrDefaultAsync(x => x.DocumentId == doc.DocumentId);
             TypeDocument typeDocument = await _db.TypeDocuments.FirstOrDefaultAsync(x => x.TypeDocumentId == doc.TypeDocumentId);
             //Nếu số lượng Approve = tổng người approve thì tài liệu này tất cả những người khác đều approve
-            if (numberApproved == numberApprove)
+            //Hoặc không nhất thiết phải tất cả (IsAllAccept)
+            if (numberApproved == numberApprove || !step.IsAllAccept)
             {
                 //Nếu đang Step cuối thì Document IsCompleted ngược lại thì tăng Step lên
                 int countStep = await _db.Steps.CountAsync(x => x.ApproveProcessId == doc.ApproveProcessId);

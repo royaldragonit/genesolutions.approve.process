@@ -22,7 +22,6 @@ namespace eDoc_Core.Models.Entities
         public virtual DbSet<ApproveDocument> ApproveDocuments { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<ParamEmailTemplate> ParamEmailTemplates { get; set; }
-        public virtual DbSet<LogException> LogExceptions { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -36,7 +35,6 @@ namespace eDoc_Core.Models.Entities
             modelBuilder.Entity<ApproveDocument>();
             modelBuilder.Entity<EmailTemplate>();
             modelBuilder.Entity<ParamEmailTemplate>();
-            modelBuilder.Entity<LogException>();
         }
     }
 

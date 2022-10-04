@@ -10,5 +10,6 @@ namespace eDoc_Core.Models.ApproveProcessModels
     {
         public List<string> ApproveWith { get; set; }
         public int RollBack { get; set; }
+        public bool IsAllAccept { get; set; }
     }
 }

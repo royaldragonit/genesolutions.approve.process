@@ -56,7 +56,7 @@ namespace eDoc_Core.Core
             if(files.Count==0) return false;
             for (int i = 0; i < files.Count; i++)
             {
-                if ((Path.GetExtension(files[i].FileName) != ".xls" || Path.GetExtension(files[i].FileName) != ".docx"|| Path.GetExtension(files[i].FileName) != ".xlsx")  && !string.IsNullOrEmpty(files[i].FileName))
+                if ((Path.GetExtension(files[i].FileName) != ".pdf" ||Path.GetExtension(files[i].FileName) != ".xls" || Path.GetExtension(files[i].FileName) != ".docx"|| Path.GetExtension(files[i].FileName) != ".doc"|| Path.GetExtension(files[i].FileName) != ".xlsx")  && !string.IsNullOrEmpty(files[i].FileName))
                 {
                     return false;
                 }

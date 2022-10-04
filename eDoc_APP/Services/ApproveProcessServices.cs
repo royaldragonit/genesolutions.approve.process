@@ -40,6 +40,7 @@ namespace eDoc_APP.Services
                     _db.Approves.Add(stepDetail);
                 }
                 step.RollBackToStep = s.RollBack;
+                step.IsAllAccept = s.IsAllAccept;
                 step.ApproveProcess = approve;
                 _db.Steps.Add(step);
             });
